@@ -5,7 +5,7 @@ function memoryGame() {
     showRestart: false,
     cardsPairs: 6,
     cardGridClass: '1/4',
-    revealTime: 5, //seconds
+    revealTime: 1, //seconds
     won: false,
 
     init() {
@@ -44,15 +44,19 @@ function memoryGame() {
         this.cards[index].opened = true;
         this.flippedCards.push(index);
         if (this.flippedCards.length === 2) {
+          const [card1, card2] = this.flippedCards;
+          if (this.cards[card1].value === this.cards[card2].value) {
+            this.cards[card1].matched = true;
+            this.cards[card2].matched = true;
+            this.flippedCards = [];
+            this.checkForWin();
+            return;
+          }
+
+
           setTimeout(() => {
-            const [card1, card2] = this.flippedCards;
-            if (this.cards[card1].value === this.cards[card2].value) {
-              this.cards[card1].matched = true;
-              this.cards[card2].matched = true;
-            } else {
-              this.cards[card1].opened = false;
-              this.cards[card2].opened = false;
-            }
+            this.cards[card1].opened = false;
+            this.cards[card2].opened = false;
             this.flippedCards = [];
             this.checkForWin();
           }, 1000);
