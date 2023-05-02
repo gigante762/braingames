@@ -5,14 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.min.css">
 
-    <style>
-        .bg-stripes-white {
-                background-image: linear-gradient(135deg,#ffffffbf 10%,#0000 0,#0000 50%,#ffffffbf 0,#ffffffbf 60%,#0000 0,#0000);
-                background-size: 7.07px 7.07px;
-            }
-    </style>
     <title>Memory game</title>
 </head>
 <body>
@@ -24,24 +18,15 @@
     </div>
 
     <div x-data="memoryGame()" x-init="init()">
-        <div class="flex flex-wrap p-4">
-          <template x-for="(card, index) in cards" :key="index">
-            <div :class="`w-${cardGridClass} p-2 cursor-pointer select-none`">
-              <div class="border-2  border-gray-400 rounded shadow-md h-32" 
-              x-bind:class="card.matched || card.opened ? `bg-${card.value}-500` : 'bg-gray-300 bg-stripes-white'"
-              @click="selectCard(index)">
-                <div class="flex items-center justify-center h-full" x-show="card.opened || card.matched">
-                  
-                </div>
-              </div>
-            </div>
-          </template>
+        <div class="flex flex-wrap p-4 justify-center">
+          <div class="font-bold text-8xl flex justify-center items-center p-2 cursor-pointer select-noneborder-2 border-gray-400 rounded shadow-md h-32 w-32 bg-gray-300"
+            x-text="actualCard">
+          </div>
+            
         </div>
-
-        <p class="font-bold text-3xl text-center" x-show="won">YOU WON!!!</p>
         <div class="flex flex-col justify-space-around">
             <div>
-                <input class="border border-gray-400 p-2 rounded-md"  min="2" max="8" type="number" step="1" placeholder="Number of cards" x-model="cardsPairs">
+                <input class="border border-gray-400 p-2 rounded-md"  min="2" type="number" step="1" placeholder="Number of cards" x-model="charactersCount">
                 <button class="bg-blue-500 text-white py-2 px-4 rounded" @click="restart()">Restart</button>
             </div>
             
@@ -49,7 +34,13 @@
                 <input class="border border-gray-400 p-2 rounded-md"  min="1" type="number" step="1" placeholder="Reveal revealTime" x-model="revealTime">
                 <button class="bg-blue-500 text-white py-2 px-4 rounded" @click="revealCards()" x-text="`Reveal Cards for ${revealTime}s`"></button>
             </div>
+
+            <div>
+                <input class="border border-gray-400 p-2 rounded-md"  type="text" placeholder="The sequence" x-model.lazy="answer">
+                <button class="bg-blue-500 text-white py-2 px-4 rounded" @click="checkAnswer()">Check answer</button>
+            </div>
         </div>
+        <p class="font-bold text-3xl text-center" x-show="won" x-text="won"></p>
 
       </div>
     <script src="js/characters.js"></script>

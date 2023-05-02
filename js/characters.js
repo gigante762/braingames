@@ -1,94 +1,64 @@
 function memoryGame() {
   return {
     cards: [],
-    flippedCards: [],
     showRestart: false,
-    cardsPairs: 6,
-    cardGridClass: '1/4',
+    charactersCount: 5,
     revealTime: 1, //seconds
     won: false,
+    actualCard: 'Ready?',
+    answer: '',
+    characters: [],
 
     init() {
+      //const letters = ['red', 'blue', 'yellow', 'orange', 'stone', 'white', 'green', 'purple'];
+      //const emmojis = ['red', 'blue', 'yellow', 'orange', 'stone', 'white', 'green', 'purple'];
+      this.cards = [];
+      const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-      this.setCardGridClass();
+      this.characters = [...numbers];
 
-      const colors = ['red', 'blue', 'yellow', 'orange', 'stone', 'white', 'green', 'purple'];
-
-      const selectCard = this.shuffle(colors).slice(0, this.cardsPairs);
-
-      let colorCards = [...selectCard, ...selectCard];
-
-      this.cards = this.shuffle(colorCards).map((color) => ({
-        value: color, opened: false, matched: false
-      }));
-
-    },
+      while (this.cards.length < this.charactersCount) {
+        let index = Math.floor(Math.random() * this.characters.length - 1) + 0;
 
 
-    setCardGridClass() {
-      if (this.cardsPairs % 2 == 0) {
-        this.cardGridClass = '1/4';
-      } else {
-        this.cardGridClass = '1/3';
-      }
-    },
-
-    selectCard(index) {
-
-      if (this.isFlipped(index)) {
-        return;
-      }
-
-
-      if (this.flippedCards.length < 2) {
-        this.cards[index].opened = true;
-        this.flippedCards.push(index);
-        if (this.flippedCards.length === 2) {
-          const [card1, card2] = this.flippedCards;
-          if (this.cards[card1].value === this.cards[card2].value) {
-            this.cards[card1].matched = true;
-            this.cards[card2].matched = true;
-            this.flippedCards = [];
-            this.checkForWin();
-            return;
-          }
-
-
-          setTimeout(() => {
-            this.cards[card1].opened = false;
-            this.cards[card2].opened = false;
-            this.flippedCards = [];
-            this.checkForWin();
-          }, 1000);
+        if (!this.cards.length) {
+          this.cards.push(this.characters[index]);
+          continue;
         }
+
+        if (this.cards[this.cards.length - 1] !== this.characters[index] && this.characters[index]) {
+          this.cards.push(this.characters[index]);
+        }
+
       }
+      console.log(this.cards);
     },
 
-    isFlipped(index) {
-      return this.flippedCards.includes(index);
+    checkAnswer() {
+      if (this.answer == this.cards.join('')) {
+        this.won = 'YOU WON!!!';
+      } else {
+        this.won = 'Not correct. Try again.';
+
+        setTimeout(() => {
+          this.won = false;
+        }, 1000)
+      }
     },
 
     revealCards() {
-      for (const card of this.cards) {
-        if (!card.matched) {
-          card.opened = true;
-
-          setTimeout(() => {
-            card.opened = false;
-          }, this.revealTime * 1000);
+      let index = 0;
+      const intervalId = setInterval(() => {
+        this.actualCard = this.cards[index];
+        console.log(this.actualCard);
+        index++;
+        if (index > this.cards.length) {
+          clearInterval(intervalId);
+          this.actualCard = '.';
         }
-      }
-    },
+      }, this.revealTime * 1000);
 
-    checkForWin() {
-      if (this.cards.filter(card => !card.matched).length === 0) {
-        this.showRestart = true;
-        this.won = true;
-      }
-    },
 
-    shuffle(arrayData) {
-      return arrayData.sort(() => Math.random() - 0.5)
     },
 
     restart() {
