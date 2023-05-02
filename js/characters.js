@@ -1,13 +1,14 @@
 function memoryGame() {
   return {
     cards: [],
-    showRestart: false,
     charactersCount: 5,
     revealTime: 1, //seconds
     won: false,
     actualCard: 'Ready?',
     answer: '',
     characters: [],
+    compareAnswer: false,
+
 
     init() {
       //const letters = ['red', 'blue', 'yellow', 'orange', 'stone', 'white', 'green', 'purple'];
@@ -35,6 +36,7 @@ function memoryGame() {
     },
 
     checkAnswer() {
+      this.compareAnswer = true;
       if (this.answer == this.cards.join('')) {
         this.won = 'YOU WON!!!';
       } else {
@@ -63,9 +65,10 @@ function memoryGame() {
 
     restart() {
       this.cards = [];
-      this.flippedCards = [];
-      this.showRestart = false;
+      this.actualCard = 'Ready?'
+      this.answer = '';
       this.won = false;
+      this.compareAnswer = false;
       this.init();
     }
   }

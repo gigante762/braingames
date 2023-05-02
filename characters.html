@@ -22,11 +22,17 @@
           <div class="font-bold text-8xl flex justify-center items-center p-2 cursor-pointer select-noneborder-2 border-gray-400 rounded shadow-md h-32 w-32 bg-gray-300"
             x-text="actualCard">
           </div>
-            
+        </div>
+
+        <div class="flex justify-center bg-gray-200 p-2 ">
+          <template  x-for="(character, i) in answer.split('')">
+            <div x-text="character" class="p-3 text-2xl m-1 rounded" x-bind:class="cards[i] == answer[i] ?'bg-green-500': 'bg-red-500'">
+            </div>
+          </template>
         </div>
         <div class="flex flex-col justify-space-around">
             <div>
-                <input class="border border-gray-400 p-2 rounded-md"  min="2" type="number" step="1" placeholder="Number of cards" x-model="charactersCount">
+                <input class="border border-gray-400 p-2 rounded-md"  min="2" type="number" step="1" placeholder="Number of characters" x-model="charactersCount">
                 <button class="bg-blue-500 text-white py-2 px-4 rounded" @click="restart()">Restart</button>
             </div>
             
