@@ -3,9 +3,9 @@ function memoryGame() {
     cards: [],
     flippedCards: [],
     showRestart: false,
-    cardsPairs: 6,
+    cardsPairs: 4,
     cardGridClass: '1/4',
-    revealTime: 1, //seconds
+    revealTime: 0.5, //seconds
     won: false,
 
     init() {
