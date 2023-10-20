@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/3.3.1.tailwind.js"></script>
+    <script defer src="js/alpine.min.js"></script>
+    
+
+    <title>PMT</title>
+</head>
+<body>
+  
+    <div class="bg-gray-400 p-3 flex justify-between">
+      <div>
+        <input type="number" placeholder="taxa%" value="10">
+        <input type="number" placeholder="meses" value="10">
+        <input type="number" placeholder="valor" value="100">
+        <input type="number" placeholder="pmt"  value="16.27" readonly>
+        <input type="number" placeholder="total" value="162.75" readonly>
+      </div>
+    </div>
+
+    <div>
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th>Meses</th>
+            <th>Pagou</th>
+            <th>Tem que pagar</th>
+            <th>Soma juros</th>
+            <th>Valor a pagar com juros</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+            <td>Malcolm Lockyer</td>
+            <td>1961</td>
+          </tr>
+          <tr>
+            <td>Witchy Woman</td>
+            <td>The Eagles</td>
+            <td>1972</td>
+          </tr>
+          <tr>
+            <td>Shining Star</td>
+            <td>Earth, Wind, and Fire</td>
+            <td>1975</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="js/pmt.js"></script>
+</body>
+</html>
