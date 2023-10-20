@@ -10,48 +10,81 @@
 
     <title>PMT</title>
 </head>
-<body>
+<body x-data="pmtIni()">
   
     <div class="bg-gray-400 p-3 flex justify-between">
-      <div>
-        <input type="number" placeholder="taxa%" value="10">
-        <input type="number" placeholder="meses" value="10">
-        <input type="number" placeholder="valor" value="100">
-        <input type="number" placeholder="pmt"  value="16.27" readonly>
-        <input type="number" placeholder="total" value="162.75" readonly>
+  
+        <div class="mb-4">
+          <label for="tax" class="block text-gray-700 text-sm font-bold mb-2">Taxa %:</label>
+          <input
+            type="number"
+            id="tax"
+            x-model="tax"
+            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="1.99"
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label for="months" class="block text-gray-700 text-sm font-bold mb-2">Meses:</label>
+          <input
+            type="number"
+            id="months"
+            x-model="months"
+            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="10"
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label for="loan" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+          <input
+            type="number"
+            id="loan"
+            x-model="loan"
+            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="100"
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label for="pmt" class="block text-gray-700 text-sm font-bold mb-2">PMT:</label>
+          <div class="bg-green-100 border border-green-400 text-green-700 font-semibold py-2 px-4 rounded" x-text="pmt">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="finalValue" class="block text-gray-700 text-sm font-bold mb-2">Total:</label>
+          <div class="bg-green-100 border border-green-400 text-green-700 font-semibold py-2 px-4 rounded" x-text="pmt">
+          </div>
+        </div>
+        <button x-on:click="gerarPreview" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Gerar</button>
       </div>
     </div>
 
-    <div>
-      <table class="table-auto">
+    <div class="overflow-x-auto  margin-x-auto">
+      <table class="min-w-full border-collapse">
         <thead>
           <tr>
-            <th>Meses</th>
-            <th>Pagou</th>
-            <th>Tem que pagar</th>
-            <th>Soma juros</th>
-            <th>Valor a pagar com juros</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Meses</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Pagou</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Tem que pagar</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Soma juros</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Valor a pagar com juros</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td>Malcolm Lockyer</td>
-            <td>1961</td>
-          </tr>
-          <tr>
-            <td>Witchy Woman</td>
-            <td>The Eagles</td>
-            <td>1972</td>
-          </tr>
-          <tr>
-            <td>Shining Star</td>
-            <td>Earth, Wind, and Fire</td>
-            <td>1975</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Dado 1</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Dado 2</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Dado 3</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Dado 3</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Dado 3</td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </div>    
+
     <script src="js/pmt.js"></script>
 </body>
 </html>
