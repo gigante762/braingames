@@ -89,10 +89,10 @@
           <template x-for="data in gerarPreview" :key="data.mes">
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="data.mes"></td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="data.pagou"></td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="data.tem_que_pagar"></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="`R$ ${data.pagou}`"></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="`R$ ${data.tem_que_pagar}`"></td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="`+ ${tax}%`"></td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="data.tem_que_pagar_com_juros"></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" x-text="`R$ ${data.tem_que_pagar_com_juros}`"></td>
             </tr>
           </template>
           
