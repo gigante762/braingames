@@ -1,15 +1,23 @@
 function pmtIni() {
   return {
-   tax: 10,
+   tax: 0,
    loan:100,
    months:10,
    decimals:3,
 
    get pmt() {
-    const r = this.tax / 100; 
-    const PMT = this.loan * r / (1 - Math.pow(1 + r, -this.months));
 
-    return parseFloat(PMT.toFixed(this.decimals));
+    if(this.tax==0){
+      return parseFloat((this.loan/this.months).toFixed(this.decimals))
+    }
+    const r = this.tax / 100; 
+    const PMT = (this.loan * r) / (1 - Math.pow(1 + r, -this.months));
+
+    const a = parseFloat(PMT.toFixed(this.decimals));
+
+    console.log(a);
+
+    return a
    },
 
    get finalValue() {
